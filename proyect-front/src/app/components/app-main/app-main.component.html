@@ -1,37 +1,35 @@
 <!-- app-main.component.html -->
 
-<div class="container-fluid">
+<div class="container mx-auto">
   <!-- Header -->
-  <div class="row">
-    <header class="col-md-12 bg-primary text-white">
-      <h2>Nombre de tu Aplicación</h2>
-    </header>
+  <div class="bg-blue-500 text-white py-4">
+    <h2 class="text-2xl font-bold">Nombre de tu Aplicación</h2>
   </div>
 
-  <div class="row">
+  <div class="flex">
     <!-- Sidenav -->
-    <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-      <div class="sidebar-sticky">
-        <ul class="nav flex-column">
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/app/home']" routerLinkActive="active">Home</a>
+    <nav class="w-48 bg-gray-200">
+      <div class="p-4">
+        <ul class="space-y-2">
+          <li class="mb-2">
+            <a class="block px-2 py-1 bg-white text-gray-700" [routerLink]="['/app/home']" routerLinkActive="active">Home</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/app/personas']" routerLinkActive="active">Personas</a>
+          <li class="mb-2">
+            <a class="block px-2 py-1 bg-white text-gray-700" [routerLink]="['/app/personas']" routerLinkActive="active">Personas</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" [routerLink]="['/app/usuarios']" routerLinkActive="active">Usuarios</a>
+          <li class="mb-2">
+            <a class="block px-2 py-1 bg-white text-gray-700" [routerLink]="['/app/usuarios']" routerLinkActive="active">Usuarios</a>
           </li>
         </ul>
       </div>
     </nav>
 
     <!-- Contenido Principal -->
-    <main role="main" class="col-md-10 ml-sm-auto col-lg-10 px-4">
+    <main role="main" class="flex-1 p-4">
       <!-- Contenido Dinámico -->
       <router-outlet></router-outlet>
     </main>
   </div>
 </div>
 
-<button class="btn btn-danger logout-button" (click)="logout()">Cerrar Sesión</button>
+<button class="bg-red-500 text-white px-4 py-2 mt-4" (click)="logout()">Cerrar Sesión</button>
