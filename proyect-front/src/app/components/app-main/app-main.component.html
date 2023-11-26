@@ -13,28 +13,68 @@
         </div>
       </div>
       <ul class="space-y-2">
-        <li class="border-b pr-2 border-green-500 p-2">
+        <li class="border-b border-green-500 p-1">
           <a
-            class="block px-4 py-2 rounded-md transition-colors duration-300 hover:bg-green-500 hover:text-white focus:outline-none focus:bg-green-500 focus:text-white focus:ring focus:ring-green-300"
+            class="block px-4 py-1 rounded-md transition-colors duration-300 hover:bg-green-500 hover:text-white focus:outline-none focus:bg-green-500 focus:text-white focus:ring focus:ring-green-300"
             [routerLink]="['/app/home']"
-            routerLinkActive="border-2 border-green-500"
+            routerLinkActive="border-l-2 border-r-2 border-green-500"
             >Home</a
           >
         </li>
-        <li class="border-b pr-2 border-green-500 p-2">
+        <li class="border-b border-green-500 p-1">
           <a
-            class="block px-4 py-2 rounded-md transition-colors duration-300 hover:bg-green-500 hover:text-white focus:outline-none focus:bg-green-500 focus:text-white focus:ring focus:ring-green-300"
+            class="block px-4 py-1 rounded-md transition-colors duration-300 hover:bg-green-500 hover:text-white focus:outline-none focus:bg-green-500 focus:text-white focus:ring focus:ring-green-300"
+            [routerLink]="['/app/perfil']"
+            routerLinkActive="border-l-2 border-r-2 border-green-500"
+            >Perfil</a
+          >
+        </li>
+        <li class="border-b border-green-500 p-1">
+          <a
+            class="block px-4 py-1 rounded-md transition-colors duration-300 hover:bg-green-500 hover:text-white focus:outline-none focus:bg-green-500 focus:text-white focus:ring focus:ring-green-300"
             [routerLink]="['/app/personas']"
-            routerLinkActive="border-2 border-green-500"
+            routerLinkActive="border-l-2 border-r-2 border-green-500"
             >Personas</a
           >
         </li>
-        <li class="border-b pr-2 border-green-500 p-2">
+        <li class="border-b border-green-500 p-1">
           <a
-            class="block px-4 py-2 rounded-md transition-colors duration-300 hover:bg-green-500 hover:text-white focus:outline-none focus:bg-green-500 focus:text-white focus:ring focus:ring-green-300"
+            class="block px-4 py-1 rounded-md transition-colors duration-300 hover:bg-green-500 hover:text-white focus:outline-none focus:bg-green-500 focus:text-white focus:ring focus:ring-green-300"
             [routerLink]="['/app/usuarios']"
-            routerLinkActive="border-2 border-green-500"
+            routerLinkActive="border-l-2 border-r-2 border-green-500"
             >Usuarios</a
+          >
+        </li>
+        <li class="border-b border-green-500 p-1">
+          <a
+            class="block px-4 py-1 rounded-md transition-colors duration-300 hover:bg-green-500 hover:text-white focus:outline-none focus:bg-green-500 focus:text-white focus:ring focus:ring-green-300"
+            [routerLink]="['/app/noticias']"
+            routerLinkActive="border-l-2 border-r-2 border-green-500"
+            >Noticias</a
+          >
+        </li>
+        <li class="border-b border-green-500 p-1">
+          <a
+            class="block px-4 py-1 rounded-md transition-colors duration-300 hover:bg-green-500 hover:text-white focus:outline-none focus:bg-green-500 focus:text-white focus:ring focus:ring-green-300"
+            [routerLink]="['/app/rutinas']"
+            routerLinkActive="border-l-2 border-r-2 border-green-500"
+            >Rutinas</a
+          >
+        </li>
+        <li class="border-b border-green-500 p-1">
+          <a
+            class="block px-4 py-1 rounded-md transition-colors duration-300 hover:bg-green-500 hover:text-white focus:outline-none focus:bg-green-500 focus:text-white focus:ring focus:ring-green-300"
+            [routerLink]="['/app/pagolist']"
+            routerLinkActive="border-l-2 border-r-2 border-green-500"
+            >Pagos</a
+          >
+        </li>
+        <li class="border-b border-green-500 p-1">
+          <a
+            class="block px-4 py-1 rounded-md transition-colors duration-300 hover:bg-green-500 hover:text-white focus:outline-none focus:bg-green-500 focus:text-white focus:ring focus:ring-green-300"
+            [routerLink]="['/app/servicios']"
+            routerLinkActive="border-l-2 border-r-2 border-green-500"
+            >Servicios</a
           >
         </li>
       </ul>
@@ -51,14 +91,14 @@
   <!-- Contenido Principal -->
   <div class="flex flex-col h-screen w-full">
     <!-- Header -->
-    <div class="bg-gray-300 h-10 flex items-center justify-between pl-2">
+    <div class="bg-gray-300 flex items-center justify-between p-1">
       <!-- Contenido del header si es necesario -->
 
       <!-- Botón de Menú -->
       <button
         mat-icon-button
         (click)="toggleSidebar()"
-        class="bg-green-500 hover:bg-green-600 text-white rounded-full w-8 h-8 flex items-center justify-center"
+        class="bg-green-500 hover:bg-green-600 text-white rounded-full flex items-center justify-center"
       >
         <mat-icon>menu</mat-icon>
       </button>
@@ -69,9 +109,8 @@
       <router-outlet></router-outlet>
     </main>
 
-    <!-- Footer -->
     <div class="bg-gray-300 h-10">
-      <!-- Contenido del footer si es necesario -->
+
     </div>
   </div>
 </div>

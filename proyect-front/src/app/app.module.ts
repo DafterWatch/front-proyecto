@@ -6,13 +6,37 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { PersonComponent } from './components/person/person.component';
-import { MatSidenavModule  } from '@angular/material/sidenav';
-import { MatListModule  } from '@angular/material/list';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatListModule } from '@angular/material/list';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppMainComponent } from './components/app-main/app-main.component';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { MatIconModule } from '@angular/material/icon';
+import { UsuarioformularioComponent } from './components/usuarioformulario/usuarioformulario.component';
+import { PagolistComponent } from './components/pagolist/pagolist.component';
+import { PagosComponent } from './components/pagos/pagos.component';
+import { RutinasComponent } from './components/rutinas/rutinas.component';
+import { RutinainterfazComponent } from './components/rutinainterfaz/rutinainterfaz.component';
+import { PerfilComponent } from './components/perfil/perfil.component';
+import { NoticiasComponent } from './components/noticias/noticias.component';
+import { NoticiasformularioComponent } from './components/noticiasformulario/noticiasformulario.component';
+import { ServiciosComponent } from './components/servicios/servicios.component';
+import { ServicioformularioComponent } from './components/servicioformulario/servicioformulario.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
+import {
+  MatPaginator,
+  MatPaginatorIntl,
+  MatPaginatorModule,
+} from '@angular/material/paginator';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { getEsPaginatorIntl } from './es-paginator-intl';
+import { HttpClientModule } from '@angular/common/http';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -21,7 +45,17 @@ import { MatIconModule } from '@angular/material/icon';
     LoginComponent,
     PersonComponent,
     AppMainComponent,
-    UsuariosComponent
+    UsuariosComponent,
+    UsuarioformularioComponent,
+    PagolistComponent,
+    PagosComponent,
+    RutinasComponent,
+    RutinainterfazComponent,
+    PerfilComponent,
+    NoticiasComponent,
+    NoticiasformularioComponent,
+    ServiciosComponent,
+    ServicioformularioComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,9 +64,21 @@ import { MatIconModule } from '@angular/material/icon';
     MatListModule,
     BrowserAnimationsModule,
     FormsModule,
-    MatIconModule
+    MatIconModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatTableModule,
+    MatSortModule,
+    MatPaginatorModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatIconModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+    MatDialogModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [{ provide: MatPaginatorIntl, useValue: getEsPaginatorIntl() }],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
