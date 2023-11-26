@@ -30,7 +30,11 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/tailwind.scss",
+              "node_modules/tailwindcss/base.css",
+  "node_modules/tailwindcss/components.css",
+  "node_modules/tailwindcss/utilities.css"
             ],
             "scripts": []
           },
@@ -93,7 +97,10 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "node_modules/tailwindcss/base.css",
+  "node_modules/tailwindcss/components.css",
+  "node_modules/tailwindcss/utilities.css"
             ],
             "scripts": []
           }

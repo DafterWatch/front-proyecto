@@ -12,6 +12,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { AppMainComponent } from './components/app-main/app-main.component';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { UsuariosComponent } from './components/usuarios/usuarios.component';
     MatSidenavModule,
     MatListModule,
     BrowserAnimationsModule,
-    FormsModule
+    FormsModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]
