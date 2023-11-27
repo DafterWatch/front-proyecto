@@ -1,1 +1,207 @@
-<p>usuarioformulario works!</p>
+<div class="flex-1 p-5 overflow-y-auto max-h-screen">
+  <div class="w-full">
+    <div class="w-full">
+      <div class="mt-0 text-3xl font-extrabold">{{ formTitle }}</div>
+      <div class="text-md text-secondary"></div>
+    </div>
+
+    <div class="w-full my-6">
+      <div class="my-2 border-t"></div>
+    </div>
+
+    <div
+      class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 gap-6 w-full"
+    >
+      <mat-form-field class="w-full">
+        <mat-label class="text-md text-secondary">Nombres</mat-label>
+        <input type="text" matInput [formControl]="primernombreFormField" />
+        <mat-error *ngIf="primernombreFormField.invalid"
+          >Este campo es requerido</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field class="w-full">
+        <mat-label class="text-md text-secondary">Segundo Nombre</mat-label>
+        <input type="text" matInput [formControl]="segundonombreFormField" />
+      </mat-form-field>
+      <mat-form-field class="w-full">
+        <mat-label class="text-md text-secondary">A. Paterno</mat-label>
+        <input type="text" matInput [formControl]="paternoFormField" />
+        <mat-error *ngIf="paternoFormField.invalid"
+          >Este campo es requerido</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field class="w-full">
+        <mat-label class="text-md text-secondary">A. Materno</mat-label>
+        <input type="text" matInput [formControl]="maternoFormField" />
+      </mat-form-field>
+      <mat-form-field class="w-full">
+        <mat-label class="text-md text-secondary"
+          >Carnet de Identidad</mat-label
+        >
+        <input type="text" matInput [formControl]="ciFormField" />
+        <mat-error *ngIf="ciFormField.invalid"
+          >Este campo es requerido</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field class="w-full">
+        <mat-label class="text-md text-secondary">Sexo</mat-label>
+        <mat-select [formControl]="sexoFormField" required>
+          <mat-option value="0"> Femenino </mat-option>
+          <mat-option value="1"> Masculino </mat-option>
+        </mat-select>
+        <mat-error *ngIf="sexoFormField.invalid"
+          >Este campo es requerido</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field class="w-full">
+        <mat-label class="text-md text-secondary">Celular</mat-label>
+        <input type="text" matInput [formControl]="celularFormField" />
+        <mat-error *ngIf="celularFormField.invalid"
+          >Este campo es requerido</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label class="text-md text-secondary">Fecha Nacimiento</mat-label>
+        <input
+          matInput
+          [matDatepicker]="pickerBirth"
+          [formControl]="fechaNacimientoFormField"
+        />
+        <mat-error *ngIf="fechaNacimientoFormField.invalid"
+          >Este campo es requerido</mat-error
+        >
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="pickerBirth"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #pickerBirth></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field class="w-full">
+        <mat-label class="text-md text-secondary">Correo</mat-label>
+        <input type="text" matInput [formControl]="correoFormField" />
+        <mat-error *ngIf="correoFormField.invalid"
+          >Este campo es requerido</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field class="w-full">
+        <mat-label class="text-md text-secondary">Contraseña</mat-label>
+        <input type="password" matInput [formControl]="contraseniaFormField" />
+        <mat-error *ngIf="contraseniaFormField.invalid"
+          >Este campo es requerido</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field class="w-full">
+        <mat-label class="text-md text-secondary">Rol</mat-label>
+        <mat-select [formControl]="rolFormField" required>
+          <mat-option value="Cliente"> Cliente </mat-option>
+          <mat-option value="Empleado"> Empleado </mat-option>
+        </mat-select>
+        <mat-error *ngIf="rolFormField.invalid"
+          >Este campo es requerido</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field class="w-full">
+        <mat-label class="text-md text-secondary">Tipo de Cuerpo</mat-label>
+        <mat-select [formControl]="tipoCuerpoFormField" required>
+          <mat-option value="Ectomorfo"> Ectomorfo - Delgado </mat-option>
+          <mat-option value="Mesomorfo"> Mesomorfo - Promedio</mat-option>
+          <mat-option value="Endomorfo"> Endomorfo - Obeso</mat-option>
+        </mat-select>
+        <mat-error *ngIf="tipoCuerpoFormField.invalid"
+          >Este campo es requerido</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field class="w-full">
+        <mat-label class="text-md text-secondary">Peso (en kg)</mat-label>
+        <input type="number" matInput [formControl]="pesoFormField" />
+        <mat-error *ngIf="pesoFormField.invalid"
+          >Este campo es requerido</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field class="w-full">
+        <mat-label class="text-md text-secondary">Altura (en cm)</mat-label>
+        <input type="number" matInput [formControl]="alturaFormField" />
+        <mat-error *ngIf="alturaFormField.invalid"
+          >Este campo es requerido</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field class="w-full">
+        <mat-label class="text-md text-secondary">Problemas de Salud</mat-label>
+        <mat-select [formControl]="problemasSaludFormField" required>
+          <mat-option value="Si"> Si </mat-option>
+          <mat-option value="No"> No </mat-option>
+        </mat-select>
+        <mat-error *ngIf="problemasSaludFormField.invalid"
+          >Este campo es requerido</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field class="w-full">
+        <mat-label class="text-md text-secondary"
+          >Objetivo Entrenamiento</mat-label
+        >
+        <mat-select [formControl]="objetivoFormField" required>
+          <mat-option value="PerderPeso"> PerderPeso </mat-option>
+          <mat-option value="GanarMasa"> Ganar Masa </mat-option>
+        </mat-select>
+        <mat-error *ngIf="objetivoFormField.invalid"
+          >Este campo es requerido</mat-error
+        >
+      </mat-form-field>
+      <div class="w-full p-2">
+        <div class="w-full">
+          <span>Nivel de Grasa </span
+          ><span>{{ grasaFormField.value }} - {{ grasaText }}</span>
+        </div>
+        <mat-slider
+          class="w-full"
+          style="width: 90%"
+          (change)="updateSettingGrasa(grasaFormField)"
+          min="1"
+          max="10"
+          step="1"
+        >
+          <input matSliderThumb [formControl]="grasaFormField" />
+        </mat-slider>
+      </div>
+      <div class="w-full p-2">
+        <div class="w-full">
+          <span>Nivel de Experiencia: </span
+          ><span>{{ experienciaFormField.value }} - {{ expText }}</span>
+        </div>
+        <mat-slider
+          class="w-full"
+          style="width: 90%"
+          (change)="updateSettingExperiencia(experienciaFormField)"
+          min="1"
+          max="10"
+          step="1"
+        >
+          <input matSliderThumb [formControl]="experienciaFormField" />
+        </mat-slider>
+      </div>
+    </div>
+
+    <div class="w-full">
+      <div class="my-2 border-t"></div>
+    </div>
+
+    <!-- Actions -->
+    <div
+      class="flex flex-col sm:flex-row md:flex-row lg:flex-row xl:flex-row items-center justify-end gap-5"
+    >
+      <button
+        class="bg-green-500 text-white p-2 px-6 rounded-md transition-colors duration-300 hover:bg-green-600"
+        (click)="onSave()"
+      >
+        <span class="mx-2">{{ this.data.id == 0 ? "Crear" : "Editar" }}</span>
+      </button>
+      <button
+        class="bg-green-500 text-white p-2 px-6 rounded-md transition-colors duration-300 hover:bg-green-600"
+        type="button"
+        (click)="onCancel()"
+      >
+        <span class="mx-2">Cancelar</span>
+      </button>
+    </div>
+  </div>
+</div>

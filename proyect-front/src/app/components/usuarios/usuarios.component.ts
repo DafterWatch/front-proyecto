@@ -9,7 +9,8 @@ import { UsuarioformularioComponent } from '../usuarioformulario/usuarioformular
 
 export interface IUsuario {
   id_persona: number;
-  nombres: string;
+  primernombre: string;
+  segundonombre: string;
   paterno: string;
   materno: string;
   ci: string;
@@ -24,8 +25,6 @@ export interface IUsuario {
 export class UsuariosComponent implements OnInit, AfterViewInit {
   displayedColumns = [
     'nombres',
-    'paterno',
-    'materno',
     'ci',
     'celular',
     'actions',
@@ -78,11 +77,7 @@ export class UsuariosComponent implements OnInit, AfterViewInit {
       const isAsc = sort.direction === 'asc';
       switch (sort.active) {
         case 'nombres':
-          return compare(a.nombres, b.nombres, isAsc);
-        case 'paterno':
-          return compare(a.paterno, b.paterno, isAsc);
-        case 'materno':
-          return compare(a.materno, b.materno, isAsc);
+          return compare(a.primernombre, b.primernombre, isAsc);
         case 'ci':
           return compare(a.ci, b.ci, isAsc);
         case 'celular':
@@ -94,13 +89,15 @@ export class UsuariosComponent implements OnInit, AfterViewInit {
     this.dataSource.data = this.sortedData;
   }
   public onDetail(row: any): void {
+    console.log(row);
+
     const dialogRef = this.dialog.open(UsuarioformularioComponent, {
         data: {
-            id: row != null ? row.id : 0,
+            id: row != null ? row.id_persona : 0,
         },
         autoFocus: false,
         restoreFocus: false,
-        disableClose: false,
+        disableClose: true,
         width: '800px',
     });
     dialogRef.afterClosed().subscribe((res) => {
