@@ -1,4 +1,9 @@
 import { Component } from '@angular/core';
+import {
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { combineLatest } from 'rxjs';
 import { AuthService } from 'src/app/auth.service';
@@ -12,27 +17,37 @@ import { SnackbarService } from 'src/app/snackbar.service';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
-  username = '';
-  password = '';
+  signInForm!: UntypedFormGroup;
   constructor(
     private authService: AuthService,
     private router: Router,
     public snackService: SnackbarService,
     public personaServiceData: PersonaDataService,
-    public loginService: LoginService
+    public loginService: LoginService,
+    private _formBuilder: UntypedFormBuilder
   ) {}
+  ngOnInit(): void {
+    this.signInForm = this._formBuilder.group({
+      username: ['', [Validators.required]],
+      password: ['', Validators.required],
+    });
+  }
   login() {
-    console.log(this.username);
-    console.log(this.password);
+    console.log(this.signInForm.value.username);
+    console.log(this.signInForm.value.password);
 
-    if (this.username.length == 0 && this.password.length == 0) {
+    // if (this.username.length == 0 && this.password.length == 0) {
+    //   this.snackService.show('Correo o contraseña invalido');
+    //   return;
+    // }
+    if (this.signInForm.invalid) {
       this.snackService.show('Correo o contraseña invalido');
       return;
     }
     combineLatest([
       this.loginService.login({
-        usuario: this.username,
-        contrasenia: this.password,
+        usuario: this.signInForm.value.username,
+        contrasenia: this.signInForm.value.password,
       }),
     ]).subscribe((response: any) => {
       if (response[0].body.resultado == 1) {
