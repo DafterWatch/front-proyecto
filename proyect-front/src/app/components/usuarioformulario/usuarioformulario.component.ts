@@ -1,9 +1,9 @@
 import { Component, Inject } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 import { Subscription, combineLatest } from 'rxjs';
 import { UsuarioService } from 'src/app/services/usuario.service';
+import { SnackbarService } from 'src/app/snackbar.service';
 
 @Component({
   selector: 'app-usuarioformulario',
@@ -19,9 +19,9 @@ export class UsuarioformularioComponent {
   private subscription: Subscription = new Subscription();
   formTitle: string = '';
   idPersonaFormField = new FormControl(0);
-  idUsuarioFormField = new FormControl('');
-  idDiagnosticoFormField = new FormControl('');
-  fkidpersonaFormField = new FormControl('');
+  idUsuarioFormField = new FormControl(0);
+  idDiagnosticoFormField = new FormControl(0);
+  fkidpersonaFormField = new FormControl(0);
   primernombreFormField = new FormControl('', [Validators.required]);
   segundonombreFormField = new FormControl('');
   paternoFormField = new FormControl('', [Validators.required]);
@@ -45,8 +45,7 @@ export class UsuarioformularioComponent {
     public dialogRef: MatDialogRef<UsuarioformularioComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private usuarioService: UsuarioService,
-    //private messageService: MessageService,
-    private router: Router
+    private snackbarService: SnackbarService,
   ) {
     this.setFields(this.data.id);
   }
@@ -60,45 +59,33 @@ export class UsuarioformularioComponent {
     this.dialogRef.close();
   }
   onSave() {
-    if((this.idPersonaFormField as any) == 0){
+    if ((this.idPersonaFormField as any) == 0) {
       combineLatest([
         this.usuarioService.validate({
           ci: this.ciFormField.value,
           correo: this.correoFormField.value,
         }),
       ]).subscribe((response: any) => {
-        console.log(response);
-        console.log(response[0]);
-        console.log(response[0].body);
-        console.log(response[0].body);
         if (response[0].body.resultado === 1) {
-          console.log(response);
           combineLatest([
             this.usuarioService.addPersona(this.getFieldsPersona()),
           ]).subscribe((response2: any) => {
-            console.log('entre aki? persona', response2);
-
             let id_persona = response2[0].body.datos.id_persona;
             this.fkidpersonaFormField.setValue(id_persona);
             combineLatest([
               this.usuarioService.addUsuario(this.getFieldsUsuario()),
             ]).subscribe((response3: any) => {
-              console.log('entre aki? usuario', response3);
               combineLatest([
                 this.usuarioService.listPrediccion(this.getFieldsModelo()),
               ]).subscribe((response4: any) => {
                 let rutina = response4[0].body.valor;
-                console.log('rutina', rutina);
-                console.log('entre aki? listPrediccion', response4[0]);
                 combineLatest([
                   this.usuarioService.addDiagnostico(
                     this.getFieldsDiagnostico(rutina)
                   ),
                 ]).subscribe((response5: any) => {
-                  console.log('entre aki? addDiagnostico', response5);
                   combineLatest([this.usuarioService.listRutinas()]).subscribe(
                     (response6: any) => {
-                      console.log('entre aki? listRutinas', response6[0]);
                       this.rutinasList = response6[0].body.Rutinas;
                       const result = this.rutinasList.filter((obj) => {
                         return (obj as any).id_rutina_grupo == parseInt(rutina);
@@ -110,12 +97,9 @@ export class UsuarioformularioComponent {
                             fk_id_rutina: (result[i] as any).id_rutina,
                             completa: false,
                           }),
-                        ]).subscribe((response7: any) => {
-                          console.log('entre aki? addRutinaUsuario', response7);
-                        });
+                        ]).subscribe((response7: any) => {});
                       }
-                      console.log('termine chao');
-
+                      this.snackbarService.show('Usuario nuevo registrado');
                       this.dialogRef.close(response);
                     }
                   );
@@ -124,19 +108,36 @@ export class UsuarioformularioComponent {
             });
           });
         } else {
-          console.log(response);
+          this.snackbarService.show('Error del sistema');
         }
       });
     } else {
       combineLatest([
-        this.usuarioService.editPersona(this.getFieldsPersona(), this.idPersonaFormField.value),
-    ]).subscribe((response) => {
-        if (response[0].body.status) {
-            this.dialogRef.close(response);
-        }
-    });
+        this.usuarioService.editPersona(
+          this.getFieldsPersona(),
+          this.idPersonaFormField.value
+        ),
+      ]).subscribe((response) => {
+        let id_persona = (response as any)[0].body.id_persona;
+        this.fkidpersonaFormField.setValue(id_persona);
+        combineLatest([
+          this.usuarioService.editUsuario(
+            this.getFieldsUsuario(),
+            this.idUsuarioFormField.value
+          ),
+        ]).subscribe((response2) => {
+          combineLatest([
+            this.usuarioService.editDiagnostico(
+              this.getFieldsDiagnostico(this.rutinaFormField.value),
+              this.idDiagnosticoFormField.value
+            ),
+          ]).subscribe((response3) => {
+            this.snackbarService.show('Usuario editado');
+            this.dialogRef.close();
+          });
+        });
+      });
     }
-
   }
   private setFields(userId: number) {
     if (userId != 0) {
@@ -152,8 +153,6 @@ export class UsuarioformularioComponent {
       });
       this.usuarioService.listPersonaUnico(userId).subscribe((response) => {
         if (response != null) {
-          console.log(response.body);
-
           this.idPersonaFormField.setValue(response.body.id_persona);
           this.primernombreFormField.setValue(response.body.primernombre);
           this.segundonombreFormField.setValue(response.body.segundonombre);
@@ -182,7 +181,7 @@ export class UsuarioformularioComponent {
           this.experienciaFormField.setValue(
             response.body.experiencia.toString()
           );
-          this.sexoFormField.setValue(response.body.experiencia.toString());
+          this.sexoFormField.setValue(response.body.sexo.toString());
           this.tipoCuerpoFormField.setValue(response.body.tipocuerpo);
           this.rutinaFormField.setValue(response.body.rutina);
         }
@@ -199,7 +198,9 @@ export class UsuarioformularioComponent {
   }
   private getFieldsPersona(): any {
     return {
-      id_persona: this.idPersonaFormField.value?this.idPersonaFormField.value:'0',
+      id_persona: this.idPersonaFormField.value
+        ? this.idPersonaFormField.value
+        : '0',
       primernombre: this.primernombreFormField.value,
       segundonombre: this.segundonombreFormField.value,
       paterno: this.paternoFormField.value,
@@ -210,7 +211,9 @@ export class UsuarioformularioComponent {
   }
   private getFieldsUsuario(): any {
     return {
-      id_usuario: this.idUsuarioFormField.value?this.idUsuarioFormField.value:'',
+      id_usuario: this.idUsuarioFormField.value
+        ? this.idUsuarioFormField.value
+        : '',
       usuario: this.correoFormField.value,
       correo: this.correoFormField.value,
       contrasenia: this.contraseniaFormField.value,
@@ -238,7 +241,9 @@ export class UsuarioformularioComponent {
       perpeso = 0;
     }
     return {
-      id_diagnostico: this.idDiagnosticoFormField.value?this.idDiagnosticoFormField.value:'',
+      id_diagnostico: this.idDiagnosticoFormField.value
+        ? this.idDiagnosticoFormField.value
+        : 0,
       edad: this.returnDateInFormatYYYYMMDD(
         this.fechaNacimientoFormField.value
           ? this.fechaNacimientoFormField.value
@@ -295,27 +300,6 @@ export class UsuarioformularioComponent {
     day = parseInt(day) < 10 ? '0' + day : day;
     month = parseInt(month) < 10 ? '0' + month : month;
     return `${day}-${month}-${year}`;
-  }
-  calculateAge(dateOfBirth: Date): number {
-    // Obtener la fecha actual
-    const currentDate = new Date();
-
-    // Restar la fecha de nacimiento a la fecha actual
-    let age = currentDate.getFullYear() - dateOfBirth.getFullYear();
-
-    // Verificar si ya ha pasado el cumpleaños de este año
-    const currentMonth = currentDate.getMonth() + 1;
-    const birthMonth = dateOfBirth.getMonth() + 1;
-
-    if (
-      currentMonth < birthMonth ||
-      (currentMonth === birthMonth &&
-        currentDate.getDate() < dateOfBirth.getDate())
-    ) {
-      age--;
-    }
-
-    return age;
   }
   updateSettingGrasa(event: any) {
     this.grasaValue = event.value;

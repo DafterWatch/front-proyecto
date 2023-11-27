@@ -13,40 +13,34 @@ export class UsuarioService {
   constructor(private httpClient: HttpClient) {}
 
   public addUsuario(body: any): Observable<HttpResponse<any>> {
-    return this.httpClient
-      .post(`${this.baseUrl}/usuarios`, body, {
-        observe: 'response',
-      })
+    return this.httpClient.post(`${this.baseUrl}/usuarios`, body, {
+      observe: 'response',
+    });
   }
   public addPersona(body: any): Observable<HttpResponse<any>> {
-    return this.httpClient
-      .post(`${this.baseUrl}/personas`, body, {
-        observe: 'response',
-      })
+    return this.httpClient.post(`${this.baseUrl}/personas`, body, {
+      observe: 'response',
+    });
   }
   public addDiagnostico(body: any): Observable<HttpResponse<any>> {
-    return this.httpClient
-      .post(`${this.baseUrl}/diagnosticos`, body, {
-        observe: 'response',
-      })
+    return this.httpClient.post(`${this.baseUrl}/diagnosticos`, body, {
+      observe: 'response',
+    });
   }
   public addRutinaUsuario(body: any): Observable<HttpResponse<any>> {
-    return this.httpClient
-      .post(`${this.baseUrl}/rutinausuarios`, body, {
-        observe: 'response',
-      })
+    return this.httpClient.post(`${this.baseUrl}/rutinausuarios`, body, {
+      observe: 'response',
+    });
   }
   public validate(body: any): Observable<HttpResponse<any>> {
-    return this.httpClient
-      .post(`${this.baseUrl}/validateAdd`, body, {
-        observe: 'response',
-      })
+    return this.httpClient.post(`${this.baseUrl}/validateAdd`, body, {
+      observe: 'response',
+    });
   }
   public listPrediccion(body: any): Observable<HttpResponse<any>> {
-    return this.httpClient
-      .post(`${this.baseUrl}/modelo`, body, {
-        observe: 'response',
-      })
+    return this.httpClient.post(`${this.baseUrl}/modelo`, body, {
+      observe: 'response',
+    });
   }
   public listRutinas(): Observable<HttpResponse<any>> {
     return this.httpClient.get(`${this.baseUrl}/rutinas`, {
@@ -78,22 +72,19 @@ export class UsuarioService {
     });
   }
 
-  public editUsuario(formUsuario: any, id: any) {
-    return this.httpClient
-      .put<any>(this.baseUrl + 'usuario/' + id, formUsuario)
-      .pipe(
-        map((Persona: any) => {
-          return Persona;
-        })
-      );
+  public editPersona(body: any, id: any): Observable<HttpResponse<any>> {
+    return this.httpClient.put(`${this.baseUrl}/persona/${id}`, body, {
+      observe: 'response',
+    });
   }
-  public editPersona(body: any, id:any): Observable<HttpResponse<any>> {
-    return this.httpClient.put(
-        `${this.baseUrl}/persona/${id}`,
-        body,
-        {
-            observe: 'response',
-        }
-    )
-}
+  public editUsuario(body: any, id: any) {
+    return this.httpClient.put(`${this.baseUrl}/usuario/${id}`, body, {
+      observe: 'response',
+    });
+  }
+  public editDiagnostico(body: any, id: any) {
+    return this.httpClient.put(`${this.baseUrl}/diagnostico/${id}`, body, {
+      observe: 'response',
+    });
+  }
 }

@@ -54,7 +54,6 @@ export class UsuariosComponent implements OnInit, AfterViewInit {
         this.listUsers = response[0].body.Personas;
         this.sortedData = this.listUsers.slice();
         this.dataSource.data = this.sortedData;
-        console.log(this.sortedData);
       }
     );
   }
@@ -89,8 +88,6 @@ export class UsuariosComponent implements OnInit, AfterViewInit {
     this.dataSource.data = this.sortedData;
   }
   public onDetail(row: any): void {
-    console.log(row);
-
     const dialogRef = this.dialog.open(UsuarioformularioComponent, {
         data: {
             id: row != null ? row.id_persona : 0,

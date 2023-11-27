@@ -1,6 +1,7 @@
 import { Component, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth.service';
+import { PersonaDataService } from 'src/app/personadata.service';
 import { SidebarService } from 'src/app/sidebar.service';
 
 @Component({
@@ -9,11 +10,17 @@ import { SidebarService } from 'src/app/sidebar.service';
   styleUrls: ['./app-main.component.scss'],
 })
 export class AppMainComponent {
+  menu = ''
   constructor(
     public authService: AuthService,
     private router: Router,
-    public sidebarService: SidebarService
-  ) {}
+    public sidebarService: SidebarService,
+    public personaDataService: PersonaDataService
+  ) {
+    console.log('data', personaDataService.getData());
+    this.menu = personaDataService.getData().menu
+    console.log(this.menu)
+  }
   ngOnInit(): void {
     this.checkScreenWidth();
   }

@@ -42,6 +42,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -88,6 +89,7 @@ import { MatSlideToggleModule } from '@angular/material/slide-toggle';
     MatNativeDateModule,
     MatSliderModule,
     MatSlideToggleModule,
+    MatSnackBarModule,
   ],
   providers: [{ provide: MatPaginatorIntl, useValue: getEsPaginatorIntl() }],
   bootstrap: [AppComponent],
