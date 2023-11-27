@@ -1,42 +1,59 @@
-<!-- Contenido Principal -->
 <div class="flex-1 p-2 bg-gray-200 overflow-y-auto">
-  <!-- Contenedor principal con sombra -->
   <div class="container mx-auto shadow-md p-4 bg-white rounded-md">
-    <div class="bg-blue-500 text-white p-4">
-      <h1 class="text-2xl font-bold">¡Hola, mundo!</h1>
-      <p class="mt-2">Este es un ejemplo de Tailwind CSS en un proyecto Angular.</p>
-    </div>
-    <div class="bg-blue-500 text-white p-4">
-      <h1 class="text-2xl font-bold">¡Hola, mundo!</h1>
-      <p class="mt-2">Este es un ejemplo de Tailwind CSS en un proyecto Angular.</p>
-    </div>
-    <div class="bg-blue-500 text-white p-4">
-      <h1 class="text-2xl font-bold">¡Hola, mundo!</h1>
-      <p class="mt-2">Este es un ejemplo de Tailwind CSS en un proyecto Angular.</p>
-    </div>
-    <div class="bg-blue-500 text-white p-4">
-      <h1 class="text-2xl font-bold">¡Hola, mundo!</h1>
-      <p class="mt-2">Este es un ejemplo de Tailwind CSS en un proyecto Angular.</p>
-    </div>
-    <div class="bg-blue-500 text-white p-4">
-      <h1 class="text-2xl font-bold">¡Hola, mundo!</h1>
-      <p class="mt-2">Este es un ejemplo de Tailwind CSS en un proyecto Angular.</p>
-    </div>
-    <div class="bg-blue-500 text-white p-4">
-      <h1 class="text-2xl font-bold">¡Hola, mundo!</h1>
-      <p class="mt-2">Este es un ejemplo de Tailwind CSS en un proyecto Angular.</p>
-    </div>
-    <div class="bg-blue-500 text-white p-4">
-      <h1 class="text-2xl font-bold">¡Hola, mundo!</h1>
-      <p class="mt-2">Este es un ejemplo de Tailwind CSS en un proyecto Angular.</p>
-    </div>
-    <div class="bg-blue-500 text-white p-4">
-      <h1 class="text-2xl font-bold">¡Hola, mundo!</h1>
-      <p class="mt-2">Este es un ejemplo de Tailwind CSS en un proyecto Angular.</p>
-    </div>
-    <div class="bg-blue-500 text-white p-4">
-      <h1 class="text-2xl font-bold">¡Hola, mundo!</h1>
-      <p class="mt-2">Este es un ejemplo de Tailwind CSS en un proyecto Angular.</p>
+    <div class="my-0 mx-0 w-full h-full">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <!-- Utiliza *ngFor para iterar sobre listNoticias -->
+        <div
+          *ngFor="
+            let noticia of listNoticias.slice(
+              getRange().startIndex,
+              getRange().endIndex
+            )
+          "
+          class="bg-white overflow-hidden shadow-md rounded-lg"
+        >
+          <img
+            class="w-full h-40 object-cover cursor-pointer"
+            [src]="noticia.imagen"
+            [alt]="noticia.titulo"
+            (click)="toggleModal(noticia)"
+          />
+          <div class="p-4">
+            <h2 class="text-2xl font-bold mb-2">{{ noticia.titulo }}</h2>
+            <p class="text-sm text-gray-600 mb-4">{{ noticia.descripcion }}</p>
+            <p class="text-xs text-gray-400">{{ noticia.fecha }}</p>
+          </div>
+          <div
+            *ngIf="modalOpen"
+            class="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-10"
+          >
+            <div
+              class="bg-white p-2 max-w-3xl max-h-3/4 overflow-hidden rounded-lg"
+            >
+              <img
+                class="w-full h-auto"
+                [src]="selectedNoticia?.imagen"
+                [alt]="selectedNoticia?.titulo"
+              />
+              <button
+                class="mt-4 px-4 py-2 text-white bg-green-500 rounded-md"
+                (click)="toggleModal(null)"
+              >
+                Cerrar
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- Fin de la iteración -->
+      </div>
+      <!-- Añade el paginador -->
+      <mat-paginator
+        [pageSize]="pageSize"
+        [pageIndex]="pageIndex"
+        [length]="listNoticias.length"
+        (page)="onPageChange($event)"
+        #paginator
+      ></mat-paginator>
     </div>
   </div>
 </div>

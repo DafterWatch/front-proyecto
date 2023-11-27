@@ -47,6 +47,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { SafePipe } from './safe.pipe';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     NoticiasformularioComponent,
     ServiciosComponent,
     ServicioformularioComponent,
+    SafePipe,
   ],
   imports: [
     BrowserModule,

@@ -1,1 +1,69 @@
-<p>rutinas works!</p>
+<div class="flex-1 p-2 bg-gray-200 overflow-y-auto">
+  <div class="container mx-auto shadow-md p-4 bg-white rounded-md">
+    <div class="my-0 mx-0 w-full h-full">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div
+          *ngFor="
+            let rutina of listRutinasScreen.slice(
+              getRange().startIndex,
+              getRange().endIndex
+            )
+          "
+          class="bg-white overflow-hidden shadow-md rounded-lg"
+        >
+          <img
+            class="w-full h-40 object-cover cursor-pointer"
+            [src]="rutina.imagen"
+            [alt]="rutina.titulo"
+            (click)="toggleModal(rutina)"
+          />
+          <div class="p-4">
+            <h2 class="text-2xl font-bold mb-2">{{ rutina.titulo }}</h2>
+            <p class="text-sm text-gray-600 mb-4">{{ rutina.descripcion }}</p>
+            <p class="text-xs text-gray-400">{{ rutina.repeticiones }}</p>
+          </div>
+          <div
+            *ngIf="modalOpen"
+            class="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-10"
+          >
+            <div
+              class="bg-white p-8 max-w-full max-h-full overflow-auto rounded-lg"
+            >
+              <iframe
+                width="100%"
+                height="315"
+                [src]="selectedRutina?.video | safe"
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen
+              ></iframe>
+              <h2 class="text-4xl font-bold my-4">
+                {{ selectedRutina?.titulo }}
+              </h2>
+              <p class="text-lg text-gray-800 my-4">
+                {{ selectedRutina?.instrucciones }}
+              </p>
+              <p class="text-base text-gray-600">
+                Repeticiones: {{ selectedRutina?.repeticiones }}
+              </p>
+              <button
+                class="mt-8 px-6 py-3 text-white bg-green-500 rounded-md"
+                (click)="toggleModal(null)"
+              >
+                Cerrar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <mat-paginator
+        [pageSize]="pageSize"
+        [pageIndex]="pageIndex"
+        [length]="listRutinasScreen.length"
+        (page)="onPageChange($event)"
+        #paginator
+      ></mat-paginator>
+    </div>
+  </div>
+</div>

@@ -17,9 +17,7 @@ export class AppMainComponent {
     public sidebarService: SidebarService,
     public personaDataService: PersonaDataService
   ) {
-    console.log('data', personaDataService.getData());
     this.menu = personaDataService.getData().menu
-    console.log(this.menu)
   }
   ngOnInit(): void {
     this.checkScreenWidth();
