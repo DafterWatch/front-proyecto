@@ -1,1 +1,107 @@
-<p>pagos works!</p>
+<div class="flex-1 p-5 overflow-y-auto max-h-screen">
+  <div class="w-full">
+    <div class="w-full">
+      <div class="mt-0 text-3xl font-extrabold">{{ formTitle }}</div>
+      <div class="text-md text-secondary"></div>
+    </div>
+
+    <div class="w-full my-6">
+      <div class="my-2 border-t"></div>
+    </div>
+
+    <div
+      class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1 xl:grid-cols-1 gap-6 w-full"
+    >
+      <mat-form-field class="w-full">
+        <mat-label class="text-md text-secondary">Correo Usuario</mat-label>
+        <mat-select [formControl]="fkIdUsuarioFormField" required>
+          <mat-option
+            *ngFor="let item of listUsuarios"
+            [value]="item.id_usuario"
+          >
+            {{ item.correo }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="fkIdUsuarioFormField.invalid"
+          >Este campo es requerido</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field class="w-full">
+        <mat-label class="text-md text-secondary">Servicio</mat-label>
+        <mat-select [formControl]="fkIdServicioFormField" required>
+          <mat-option
+            *ngFor="let item of listServicios"
+            [value]="item.id_servicio"
+          >
+            {{ item.nombre }}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="fkIdServicioFormField.invalid"
+          >Este campo es requerido</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field class="w-full">
+        <mat-label class="text-md text-secondary">Monto a Cancelar</mat-label>
+        <input type="number" matInput [formControl]="montoFormField" />
+        <mat-error *ngIf="montoFormField.invalid"
+          >Este campo es requerido</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label class="text-md text-secondary">Fecha Inicio</mat-label>
+        <input
+          matInput
+          [matDatepicker]="pickerStart"
+          [formControl]="fechaInicioFormField"
+        />
+        <mat-error *ngIf="fechaInicioFormField.invalid"
+          >Este campo es requerido</mat-error
+        >
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="pickerStart"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #pickerStart></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label class="text-md text-secondary">Fecha Fin</mat-label>
+        <input
+          matInput
+          [matDatepicker]="pickerEnd"
+          [formControl]="fechaFinFormField"
+        />
+        <mat-error *ngIf="fechaFinFormField.invalid"
+          >Este campo es requerido</mat-error
+        >
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="pickerEnd"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #pickerEnd></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div class="w-full">
+      <div class="my-2 border-t"></div>
+    </div>
+
+    <!-- Actions -->
+    <div
+      class="flex flex-col sm:flex-row md:flex-row lg:flex-row xl:flex-row items-center justify-end gap-5"
+    >
+      <button
+        class="bg-green-500 text-white p-2 px-6 rounded-md transition-colors duration-300 hover:bg-green-600"
+        (click)="onSave()"
+      >
+        <span class="mx-2">{{ this.data.id == 0 ? "Crear" : "Editar" }}</span>
+      </button>
+      <button
+        class="bg-green-500 text-white p-2 px-6 rounded-md transition-colors duration-300 hover:bg-green-600"
+        type="button"
+        (click)="onCancel()"
+      >
+        <span class="mx-2">Cancelar</span>
+      </button>
+    </div>
+  </div>
+</div>

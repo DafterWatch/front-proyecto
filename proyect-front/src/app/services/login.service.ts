@@ -22,7 +22,7 @@ export class LoginService {
   }
   public listPagoUnico(personId: number): Observable<HttpResponse<any>> {
     return this.httpClient
-      .get(`${this.baseUrl}pago/${personId}`, {
+      .get(`${this.baseUrl}pagospecial/${personId}`, {
         observe: 'response',
       })
       .pipe(

@@ -37,7 +37,11 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { getEsPaginatorIntl } from './es-paginator-intl';
 import { HttpClientModule } from '@angular/common/http';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
-import { MatNativeDateModule, MatOptionModule } from '@angular/material/core';
+import {
+  MAT_DATE_LOCALE,
+  MatNativeDateModule,
+  MatOptionModule,
+} from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSliderModule } from '@angular/material/slider';
@@ -91,7 +95,10 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatSlideToggleModule,
     MatSnackBarModule,
   ],
-  providers: [{ provide: MatPaginatorIntl, useValue: getEsPaginatorIntl() }],
+  providers: [
+    { provide: MatPaginatorIntl, useValue: getEsPaginatorIntl() },
+    { provide: MAT_DATE_LOCALE, useValue: 'es-ES' },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

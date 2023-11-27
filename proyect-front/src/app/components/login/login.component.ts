@@ -33,13 +33,6 @@ export class LoginComponent {
     });
   }
   login() {
-    console.log(this.signInForm.value.username);
-    console.log(this.signInForm.value.password);
-
-    // if (this.username.length == 0 && this.password.length == 0) {
-    //   this.snackService.show('Correo o contraseña invalido');
-    //   return;
-    // }
     if (this.signInForm.invalid) {
       this.snackService.show('Correo o contraseña invalido');
       return;
@@ -62,14 +55,8 @@ export class LoginComponent {
           combineLatest([
             this.loginService.listPagoUnico(parseInt(idUsuario)),
           ]).subscribe((response: any) => {
-            console.log(response[0].body);
             let pago = response[0].body;
-            let fechaParts = pago.fecha_fin_sus.split('-');
-            let fechaA = new Date(
-              +fechaParts[2],
-              fechaParts[1] - 1,
-              +fechaParts[0]
-            );
+            let fechaA = new Date(pago.fecha_fin_sus);
             let fechaB = new Date();
             if (fechaB <= fechaA) {
               this.authService.login();

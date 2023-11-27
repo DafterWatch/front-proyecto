@@ -65,8 +65,6 @@ export class UsuarioService {
     });
   }
   public listDiagnosticoUnico(personId: number): Observable<HttpResponse<any>> {
-    console.log('url', `${this.baseUrl}diagnostico/${personId}`);
-
     return this.httpClient.get(`${this.baseUrl}diagnostico/${personId}`, {
       observe: 'response',
     });
@@ -84,6 +82,11 @@ export class UsuarioService {
   }
   public editDiagnostico(body: any, id: any) {
     return this.httpClient.put(`${this.baseUrl}/diagnostico/${id}`, body, {
+      observe: 'response',
+    });
+  }
+  public listUsuariosReal(): Observable<HttpResponse<any>> {
+    return this.httpClient.get(`${this.baseUrl}/usuarios`, {
       observe: 'response',
     });
   }
