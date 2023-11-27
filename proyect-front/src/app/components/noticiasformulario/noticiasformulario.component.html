@@ -1,1 +1,61 @@
-<p>noticiasformulario works!</p>
+<div class="flex-1 p-5 overflow-y-auto max-h-screen">
+  <div class="w-full">
+    <div class="w-full">
+      <div class="mt-0 text-3xl font-extrabold">{{ formTitle }}</div>
+      <div class="text-md text-secondary"></div>
+    </div>
+
+    <div class="w-full my-6">
+      <div class="my-2 border-t"></div>
+    </div>
+
+    <div
+      class="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-1 lg:grid-cols-1 xl:grid-cols-1 gap-6 w-full"
+    >
+      <mat-form-field class="w-full">
+        <mat-label class="text-md text-secondary">Título</mat-label>
+        <input type="text" matInput [formControl]="tituloFormField" />
+        <mat-error *ngIf="tituloFormField.invalid"
+          >Este campo es requerido</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field class="w-full">
+        <mat-label class="text-md text-secondary">Descripción</mat-label>
+        <textarea type="text" matInput [formControl]="descripcionFormField"> </textarea>
+        <mat-error *ngIf="descripcionFormField.invalid"
+          >Este campo es requerido</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field class="w-full">
+        <mat-label class="text-md text-secondary">Imagen URL</mat-label>
+        <input type="text" matInput [formControl]="imagenFormField" />
+        <mat-error *ngIf="imagenFormField.invalid"
+          >Este campo es requerido</mat-error
+        >
+      </mat-form-field>
+    </div>
+
+    <div class="w-full">
+      <div class="my-2 border-t"></div>
+    </div>
+
+    <!-- Actions -->
+    <div
+      class="flex flex-col sm:flex-row md:flex-row lg:flex-row xl:flex-row items-center justify-end gap-5"
+    >
+      <button
+        class="bg-green-500 text-white p-2 px-6 rounded-md transition-colors duration-300 hover:bg-green-600"
+        (click)="onSave()"
+      >
+        <span class="mx-2">{{ this.data.id == 0 ? "Crear" : "Editar" }}</span>
+      </button>
+      <button
+        class="bg-green-500 text-white p-2 px-6 rounded-md transition-colors duration-300 hover:bg-green-600"
+        type="button"
+        (click)="onCancel()"
+      >
+        <span class="mx-2">Cancelar</span>
+      </button>
+    </div>
+  </div>
+</div>

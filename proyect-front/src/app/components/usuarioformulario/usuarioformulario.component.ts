@@ -200,7 +200,7 @@ export class UsuarioformularioComponent {
     return {
       id_persona: this.idPersonaFormField.value
         ? this.idPersonaFormField.value
-        : '0',
+        : '',
       primernombre: this.primernombreFormField.value,
       segundonombre: this.segundonombreFormField.value,
       paterno: this.paternoFormField.value,
@@ -243,7 +243,7 @@ export class UsuarioformularioComponent {
     return {
       id_diagnostico: this.idDiagnosticoFormField.value
         ? this.idDiagnosticoFormField.value
-        : 0,
+        : '',
       edad: this.returnDateInFormatYYYYMMDD(
         this.fechaNacimientoFormField.value
           ? this.fechaNacimientoFormField.value
