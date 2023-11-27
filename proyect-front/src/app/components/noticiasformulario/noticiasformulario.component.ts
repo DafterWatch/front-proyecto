@@ -38,6 +38,14 @@ export class NoticiasformularioComponent {
     this.dialogRef.close();
   }
   onSave() {
+    if (
+      this.tituloFormField.invalid ||
+      this.descripcionFormField.invalid ||
+      this.imagenFormField.invalid
+    ) {
+      this.snackbarService.show('Los campos con * son obligatorios');
+      return;
+    }
     if ((this.idNoticiaFormField.value as any) == 0) {
       combineLatest([
         this.noticiasService.addNoticia(this.getFields()),

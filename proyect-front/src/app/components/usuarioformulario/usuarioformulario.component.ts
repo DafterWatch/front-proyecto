@@ -45,7 +45,7 @@ export class UsuarioformularioComponent {
     public dialogRef: MatDialogRef<UsuarioformularioComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private usuarioService: UsuarioService,
-    private snackbarService: SnackbarService,
+    private snackbarService: SnackbarService
   ) {
     this.setFields(this.data.id);
   }
@@ -59,7 +59,26 @@ export class UsuarioformularioComponent {
     this.dialogRef.close();
   }
   onSave() {
-    if ((this.idPersonaFormField as any) == 0) {
+    if (
+      this.primernombreFormField.invalid ||
+      this.paternoFormField.invalid ||
+      this.ciFormField.invalid ||
+      this.celularFormField.invalid ||
+      this.contraseniaFormField.invalid ||
+      this.correoFormField.invalid ||
+      this.rolFormField.invalid ||
+      this.fechaNacimientoFormField.invalid ||
+      this.pesoFormField.invalid ||
+      this.alturaFormField.invalid ||
+      this.problemasSaludFormField.invalid ||
+      this.objetivoFormField.invalid ||
+      this.sexoFormField.invalid ||
+      this.tipoCuerpoFormField.invalid
+    ) {
+      this.snackbarService.show('Los campos con * son obligatorios');
+      return;
+    }
+    if ((this.idPersonaFormField.value as any) == 0) {
       combineLatest([
         this.usuarioService.validate({
           ci: this.ciFormField.value,
