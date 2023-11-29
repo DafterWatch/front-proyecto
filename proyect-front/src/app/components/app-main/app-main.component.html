@@ -56,6 +56,14 @@
         <li class="border-b border-green-500 p-1" *ngIf="menu==='Empleado' || menu ==='Administrador'">
           <a
             class="block px-4 py-1 rounded-md transition-colors duration-300 hover:bg-green-500 hover:text-white focus:outline-none focus:bg-green-500 focus:text-white focus:ring focus:ring-green-300"
+            [routerLink]="['/app/rutinasadmin']"
+            routerLinkActive="border-l-2 border-r-2 border-green-500"
+            >Rutinas</a
+          >
+        </li>
+        <li class="border-b border-green-500 p-1" *ngIf="menu==='Empleado' || menu ==='Administrador'">
+          <a
+            class="block px-4 py-1 rounded-md transition-colors duration-300 hover:bg-green-500 hover:text-white focus:outline-none focus:bg-green-500 focus:text-white focus:ring focus:ring-green-300"
             [routerLink]="['/app/pagolist']"
             routerLinkActive="border-l-2 border-r-2 border-green-500"
             >Pagos</a
@@ -102,7 +110,7 @@
     </main>
 
     <div class="flex items-center justify-center bg-gray-300 h-10 text-lg">
-      Versión 2.1
+      Versión 2
     </div>
   </div>
 </div>

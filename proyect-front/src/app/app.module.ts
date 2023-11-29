@@ -48,6 +48,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { SafePipe } from './safe.pipe';
+import { RutinasformularioComponent } from './components/rutinasformulario/rutinasformulario.component';
 
 @NgModule({
   declarations: [
@@ -68,6 +69,7 @@ import { SafePipe } from './safe.pipe';
     ServiciosComponent,
     ServicioformularioComponent,
     SafePipe,
+    RutinasformularioComponent,
   ],
   imports: [
     BrowserModule,

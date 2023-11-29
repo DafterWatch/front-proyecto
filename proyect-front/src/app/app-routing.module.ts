@@ -15,6 +15,7 @@ import { PerfilComponent } from './components/perfil/perfil.component';
 import { ServiciosComponent } from './components/servicios/servicios.component';
 import { ServicioformularioComponent } from './components/servicioformulario/servicioformulario.component';
 import { AuthGuard } from './auth.guard';
+import { RutinainterfazComponent } from './components/rutinainterfaz/rutinainterfaz.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -28,6 +29,7 @@ const routes: Routes = [
     { path: 'noticias', component: NoticiasComponent },
     { path: 'noticiaformulario', component: NoticiasformularioComponent },
     { path: 'rutinas', component: RutinasComponent },
+    { path: 'rutinasadmin', component: RutinainterfazComponent },
     { path: 'pagolist', component: PagolistComponent },
     { path: 'pagos', component: PagosComponent },
     { path: 'perfil', component: PerfilComponent },

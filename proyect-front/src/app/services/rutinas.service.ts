@@ -22,4 +22,14 @@ export class RutinaService {
       observe: 'response',
     });
   }
+  public listRutinarealUnico(personId: number): Observable<HttpResponse<any>> {
+    return this.httpClient.get(`${this.baseUrl}/rutina/${personId}`, {
+      observe: 'response',
+    });
+  }
+  public editRutinas(body: any, id: any): Observable<HttpResponse<any>> {
+    return this.httpClient.put(`${this.baseUrl}/rutina/${id}`, body, {
+      observe: 'response',
+    });
+  }
 }
