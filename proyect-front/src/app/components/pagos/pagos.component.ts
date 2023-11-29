@@ -30,11 +30,16 @@ export class PagosComponent {
   listServicios: IServicio[] = [];
   listUsuarios: IUsuarioReal[] = [];
   idPagoFormField = new FormControl(0);
-  fkIdServicioFormField = new FormControl(0, [Validators.required]);
-  fkIdUsuarioFormField = new FormControl(0, [Validators.required]);
-  montoFormField = new FormControl(0, [Validators.required]);
+  fkIdServicioFormField = new FormControl('', [Validators.required]);
+  fkIdUsuarioFormField = new FormControl('', [Validators.required]);
+  montoFormField = new FormControl(0, [
+    Validators.required,
+    Validators.pattern(/^[0-9]\d*$/),
+  ]);
   fechaInicioFormField = new FormControl(new Date(), [Validators.required]);
-  fechaFinFormField = new FormControl(new Date(), [Validators.required]);
+  fechaFinFormField = new FormControl(new Date(), [
+    Validators.required,
+  ]);
   fechaFormField = new FormControl(new Date());
   constructor(
     public dialogRef: MatDialogRef<PagosComponent>,
@@ -82,6 +87,15 @@ export class PagosComponent {
       this.snackbarService.show('Los campos con * son obligatorios');
       return;
     }
+    if (
+      (this.fechaInicioFormField as any).value >
+      (this.fechaFinFormField as any).value
+    ) {
+      this.snackbarService.show(
+        'La fecha fin no puede ser menor a la fecha inicio'
+      );
+      return;
+    }
     if ((this.idPagoFormField.value as any) == 0) {
       combineLatest([this.pagoService.addPago(this.getFields())]).subscribe(
         (response: any) => {
@@ -115,8 +129,8 @@ export class PagosComponent {
     } else {
       this.formTitle = 'Nuevo Pago';
       this.idPagoFormField.setValue(0);
-      this.fkIdServicioFormField.setValue(0);
-      this.fkIdUsuarioFormField.setValue(0);
+      this.fkIdServicioFormField.setValue('');
+      this.fkIdUsuarioFormField.setValue('');
       this.montoFormField.setValue(0);
       this.fechaInicioFormField.setValue(new Date());
       this.fechaFinFormField.setValue(new Date());

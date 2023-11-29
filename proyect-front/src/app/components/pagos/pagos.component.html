@@ -43,8 +43,11 @@
       <mat-form-field class="w-full">
         <mat-label class="text-md text-secondary">Monto a Cancelar</mat-label>
         <input type="number" matInput [formControl]="montoFormField" />
-        <mat-error *ngIf="montoFormField.invalid"
+        <mat-error *ngIf="montoFormField.hasError('required')"
           >Este campo es requerido</mat-error
+        >
+        <mat-error *ngIf="montoFormField.hasError('pattern')"
+          >Monto no válido</mat-error
         >
       </mat-form-field>
       <mat-form-field>

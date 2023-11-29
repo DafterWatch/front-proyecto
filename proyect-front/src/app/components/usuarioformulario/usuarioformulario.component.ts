@@ -32,8 +32,14 @@ export class UsuarioformularioComponent {
   correoFormField = new FormControl('', [Validators.required]);
   rolFormField = new FormControl('', Validators.required);
   fechaNacimientoFormField = new FormControl(new Date(), Validators.required);
-  pesoFormField = new FormControl('', [Validators.required]);
-  alturaFormField = new FormControl('', [Validators.required]);
+  pesoFormField = new FormControl('', [
+    Validators.required,
+    Validators.pattern(/^[0-9]\d*$/),
+  ]);
+  alturaFormField = new FormControl('', [
+    Validators.required,
+    Validators.pattern(/^[0-9]\d*$/),
+  ]);
   problemasSaludFormField = new FormControl('', [Validators.required]);
   objetivoFormField = new FormControl('', [Validators.required]);
   grasaFormField = new FormControl(5);

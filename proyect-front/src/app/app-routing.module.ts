@@ -8,18 +8,18 @@ import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { NoticiasComponent } from './components/noticias/noticias.component';
 import { NoticiasformularioComponent } from './components/noticiasformulario/noticiasformulario.component';
 import { RutinasComponent } from './components/rutinas/rutinas.component';
-import { RutinainterfazComponent } from './components/rutinainterfaz/rutinainterfaz.component';
 import { UsuarioformularioComponent } from './components/usuarioformulario/usuarioformulario.component';
 import { PagosComponent } from './components/pagos/pagos.component';
 import { PagolistComponent } from './components/pagolist/pagolist.component';
 import { PerfilComponent } from './components/perfil/perfil.component';
 import { ServiciosComponent } from './components/servicios/servicios.component';
 import { ServicioformularioComponent } from './components/servicioformulario/servicioformulario.component';
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
-  { path: 'app', component: AppMainComponent, children: [
+  { path: 'app', component: AppMainComponent, canActivate: [AuthGuard], children: [
     { path: '', redirectTo: 'home', pathMatch: 'full' },
     { path: 'home', component: HomeComponent },
     { path: 'personas', component: PersonComponent },

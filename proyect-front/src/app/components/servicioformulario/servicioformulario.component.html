@@ -22,8 +22,11 @@
       <mat-form-field class="w-full">
         <mat-label class="text-md text-secondary">Precio</mat-label>
         <input type="number" matInput [formControl]="precioFormField" />
-        <mat-error *ngIf="precioFormField.invalid"
+        <mat-error *ngIf="precioFormField.hasError('required')"
           >Este campo es requerido</mat-error
+        >
+        <mat-error *ngIf="precioFormField.hasError('pattern')"
+          >Precio no válido</mat-error
         >
       </mat-form-field>
     </div>

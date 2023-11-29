@@ -55,7 +55,7 @@
       </mat-form-field>
       <mat-form-field class="w-full">
         <mat-label class="text-md text-secondary">Celular</mat-label>
-        <input type="text" matInput [formControl]="celularFormField" />
+        <input type="number" matInput [formControl]="celularFormField" />
         <mat-error *ngIf="celularFormField.invalid"
           >Este campo es requerido</mat-error
         >
@@ -78,7 +78,7 @@
       </mat-form-field>
       <mat-form-field class="w-full">
         <mat-label class="text-md text-secondary">Correo</mat-label>
-        <input type="text" matInput [formControl]="correoFormField" />
+        <input type="email" matInput [formControl]="correoFormField" />
         <mat-error *ngIf="correoFormField.invalid"
           >Este campo es requerido</mat-error
         >
@@ -114,15 +114,21 @@
       <mat-form-field class="w-full">
         <mat-label class="text-md text-secondary">Peso (en kg)</mat-label>
         <input type="number" matInput [formControl]="pesoFormField" />
-        <mat-error *ngIf="pesoFormField.invalid"
+        <mat-error *ngIf="pesoFormField.hasError('required')"
           >Este campo es requerido</mat-error
+        >
+        <mat-error *ngIf="pesoFormField.hasError('pattern')"
+          >Peso no válido</mat-error
         >
       </mat-form-field>
       <mat-form-field class="w-full">
         <mat-label class="text-md text-secondary">Altura (en cm)</mat-label>
         <input type="number" matInput [formControl]="alturaFormField" />
-        <mat-error *ngIf="alturaFormField.invalid"
+        <mat-error *ngIf="alturaFormField.hasError('required')"
           >Este campo es requerido</mat-error
+        >
+        <mat-error *ngIf="alturaFormField.hasError('pattern')"
+          >Altura no válida</mat-error
         >
       </mat-form-field>
       <mat-form-field class="w-full">

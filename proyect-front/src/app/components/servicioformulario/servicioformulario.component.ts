@@ -15,7 +15,10 @@ export class ServicioformularioComponent {
   formTitle: string = '';
   idServicioFormField = new FormControl(0);
   nombreFormField = new FormControl('', [Validators.required]);
-  precioFormField = new FormControl(0, [Validators.required]);
+  precioFormField = new FormControl(0, [
+    Validators.required,
+    Validators.pattern(/^[0-9]\d*$/),
+  ]);
 
   constructor(
     public dialogRef: MatDialogRef<ServicioformularioComponent>,
@@ -35,10 +38,7 @@ export class ServicioformularioComponent {
     this.dialogRef.close();
   }
   onSave() {
-    if (
-      this.nombreFormField.invalid ||
-      this.precioFormField.invalid
-    ) {
+    if (this.nombreFormField.invalid || this.precioFormField.invalid) {
       this.snackbarService.show('Los campos con * son obligatorios');
       return;
     }
