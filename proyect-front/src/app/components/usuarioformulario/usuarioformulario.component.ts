@@ -152,13 +152,38 @@ export class UsuarioformularioComponent {
           ),
         ]).subscribe((response2) => {
           combineLatest([
-            this.usuarioService.editDiagnostico(
-              this.getFieldsDiagnostico(this.rutinaFormField.value),
-              this.idDiagnosticoFormField.value
-            ),
+            this.usuarioService.listPrediccion(this.getFieldsModelo()),
           ]).subscribe((response3) => {
-            this.snackbarService.show('Usuario editado');
-            this.dialogRef.close();
+            let rutina = response3[0].body.valor;
+            combineLatest([
+              this.usuarioService.editDiagnostico(
+                this.getFieldsDiagnostico(rutina),
+                this.idDiagnosticoFormField.value
+              ),
+            ]).subscribe((response4) => {});
+            this.usuarioService
+              .deleteRutinasUser(this.idPersonaFormField.value as any)
+              .subscribe((response) => {
+                combineLatest([this.usuarioService.listRutinas()]).subscribe(
+                  (response6: any) => {
+                    this.rutinasList = response6[0].body.Rutinas;
+                    const result = this.rutinasList.filter((obj) => {
+                      return (obj as any).id_rutina_grupo == parseInt(rutina);
+                    });
+                    for (let i = 0; i < result.length; i++) {
+                      combineLatest([
+                        this.usuarioService.addRutinaUsuario({
+                          fk_id_persona: this.idPersonaFormField.value,
+                          fk_id_rutina: (result[i] as any).id_rutina,
+                          completa: false,
+                        }),
+                      ]).subscribe((response7: any) => {});
+                    }
+                    this.snackbarService.show('Usuario editado');
+                    this.dialogRef.close();
+                  }
+                );
+              });
           });
         });
       });

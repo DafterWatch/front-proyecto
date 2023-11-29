@@ -52,6 +52,10 @@ export class UsuarioService {
     return this.httpClient.get(`${this.baseUrl}/personas`, {
       observe: 'response',
     });
+  }public deleteRutinasUser(personId: number): Observable<HttpResponse<any>> {
+    return this.httpClient.delete(`${this.baseUrl}/rutinausuario/${personId}`, {
+      observe: 'response',
+    });
   }
 
   public listPersonaUnico(personId: number): Observable<HttpResponse<any>> {
